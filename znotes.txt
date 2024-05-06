@@ -1,6 +1,9 @@
 
 5/6/24
 
+I tested to see if the shelfs were finishing. It looked fine to me. Lets keep an eye on it the next few days to make sure it's still ok.
+
+
 Deleted the Shelf C file, looks like it fixed the issue we were having
 
 

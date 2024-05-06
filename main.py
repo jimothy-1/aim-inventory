@@ -23,8 +23,6 @@ from datetime import datetime, timedelta
 # shelf_products = []
 # counter = 0
 
-print('Yo')
-
 erp_url = 'https://erp.aimdynamics.com'
 odoo_key = 'LPONkmPNibeba413OvxfiOyFFjVpzyMd'
 odoo_secret = 'x9pPnEb02uc2dju83xaeQbrqTV3CTc3a'
