@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="icon" href="data:,">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/home_style.css') }}">
+</head>
+<body>
+<div class="area" >
+  <ul class="circles">
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+  </ul>
+</div >
+
+<div class="context" style="text-align: center;">
+  <h1>Here are files ready for review:</h1>
+  <h3>Select a file to begin</h3>
+  <h4>Shelf Letter | Start Date | Start Time</h4><br>
+
+  {% for file in warehousereadershell.readers %}
+  <div class="admin-review-buttons">
+    <a href="/review-file/{{ file.shelf_letter }}" class="admin-review-column">Shelf {{ file.shelf_letter }} {{ file.date }} {{ file.time }}</a>
+    <a href="/email-file/{{ file.shelf_letter }}" class="admin-review-column" id="link-option-2">Download</a>
+  </div>
+  {% endfor %}
+
+  {% if not warehousereadershell.readers %}
+  <a href="/">Nothing here! Back to Home</a><br>
+  {% endif %}
+
+  <a href="/change-email">Change Admin Email</a>
+  
+</div>
+
+</body>
+</html>

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="icon" href="data:,">
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/home_style.css') }}">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"/>
+    </head>
+    <body>
+        <div class="area" >
+            <ul class="circles">
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+            </ul>
+          </div >
+
+        <div class='context' style="text-align: center;">
+            <h1>Shelf {{ shelf }} Inventory <a href="/"><span class="material-symbols-outlined">home</span></a></h1><br>
+            <!-- USE RADIO BUTTONS INSTEAD -->
+
+            <!-- Here's the grand idea:
+            1. Shows everything it thinks is at a given location
+            2. The user marks yes or no using radio buttons for each product
+            3. At the bottom, there is a button that says add product
+            4. When clicked, you go to a temp page to enter in details (maybe even has suggestions based on items in shipstation)
+            5. Returns you back to this page with the added product, true selected
+            6. Another button to enter in data, which returns a second page with updated qty's
+            7. Functions behind the scene is creating another bin, 
+                which will be compared to the real bin at end, changes in the bin are marked in the file -->
+
+            <form method="post" action="/{{ shelf }}/{{ shelf_code }}/qty" id="myForm">
+            {% for product in bin_data.products %}
+                <p>{{ product.name }} exists at <b>{{ shelf_code }}</b></p>
+
+                <div class="location-true-or-false">
+                    <input name="trueorfalse-{{ product.name }}" type="radio" id="true-option-{{ product.name }}" class="hidden-toggles__input" value="true" checked="checked">
+                    <label for="true-option-{{ product.name }}" class="hidden-toggles__label">True</label>
+                    
+                    <input name="trueorfalse-{{ product.name }}" type="radio" id="false-option-{{ product.name }}" class="hidden-toggles__input" value="false">
+                    <label for="false-option-{{ product.name }}" class="hidden-toggles__label">False</label>	
+                </div>
+                <br>
+
+            {% endfor %}
+            
+            {% if not bin_data.products %}
+            <p><b>{{ shelf_code }}</b> is marked empty</p>
+            <!-- <div class="location-true-or-false">
+                <input name="trueorfalse-empty" type="radio" id="true-option-empty" class="hidden-toggles__input" checked="checked">
+                <label for="true-option" class="hidden-toggles__label">True</label>
+                
+                <input name="trueorfalse-empty" type="radio" id="false-option-empty" class="hidden-toggles__input">
+                <label for="false-option" class="hidden-toggles__label">False</label>	
+            </div> -->
+            {% endif %}
+
+            <a href="/add-product/{{ shelf }}/{{ shelf_code }}" id="add_product">Add Product</a>
+            <button type= "submit" id="next">Next</button>
+
+            </form>
+        
+        </div>
+
+    </body>
+</html>

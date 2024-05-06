@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="icon" href="data:,">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/home_style.css') }}">
+</head>
+<body>
+<div class="area" >
+  <ul class="circles">
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+  </ul>
+</div >
+
+<div class="context" style="text-align: center;">
+  <h1>Welcome to Warehouse Tracker!</h1>
+  <h3>To begin, select the shelf you will be doing inventory for</h3><br>
+
+  {% for letter in warehouse.shelf_letters %}
+  <a href="{{ letter }}">Shelf {{ letter.upper()}}</a><br>
+  {% endfor %}
+
+</div>
+
+</body>
+</html>

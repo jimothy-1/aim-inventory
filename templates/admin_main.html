@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="icon" href="data:,">
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/home_style.css') }}">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"/>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"/>
+    </head>
+    <body>
+        <div class="area" >
+            <ul class="circles">
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+            </ul>
+          </div >
+
+        <div class='context' style="text-align: center;">
+            <h1>Shelf {{ warehousereader.shelf_letter }} Review <a href="/admin"><span class="material-symbols-outlined">home</span></a></h1><br>
+
+            <form action="#" method="post">
+                {% if warehousereader.line['error_type'] == 'Add Item' %}
+                    <h4>A product was in a location not marked in ShipStation</h4><br>
+                    <h3>Part number <b><a href="https://ship5.shipstation.com/products?quickSearch={{ warehousereader.line['user_output'] }}" target="_blank" id= "text_link">{{ warehousereader.line['user_output'] }}<span class="material-symbols-outlined">open_in_new</span></a></b> was found in location <b>{{ warehousereader.line['warehouse_location'] }}</b>, but the location was not marked in Shipstation</h3><br>
+                    <h2>Do you want to add the location <b>{{ warehousereader.line['warehouse_location'] }}</b> to product <b>{{ warehousereader.line['user_output'] }}</b> in ShipStation?</h2><br>
+                    <button type="submit" name="action" value="shipstation">Update ShipStation</button>
+                {% endif %}
+
+                {% if warehousereader.line['error_type'] == 'Remove Item' %}
+                    <h4>Item is no longer found at a specific warehouse location</h4><br>
+                    <h3>Part number <b><a href="https://ship5.shipstation.com/products?quickSearch={{ warehousereader.line['name'] }}" target="_blank" id= "text_link">{{ warehousereader.line['name'] }}<span class="material-symbols-outlined">open_in_new</span></a></b> was not found in location <b>{{ warehousereader.line['warehouse_location'] }}</b>, but the location is marked in Shipstation</h3><br>
+                    <h2>Do you want to remove the location <b>{{ warehousereader.line['warehouse_location'] }}</b> from product <b>{{ warehousereader.line['user_output'] }}</b> in ShipStation?</h2><br>
+                    <button type="submit" name="action" value="shipstation">Update ShipStation</button>
+                {% endif %}
+
+                {% if warehousereader.line['error_type'] == 'Quantity Mismatch' %}
+                    <h4>Odoo specifies a different quantity than physically counted</h4><br>
+                    <h3>Part number <b><a href="https://ship5.shipstation.com/products?quickSearch={{ warehousereader.line['name'] }}" target="_blank" id= "text_link">{{ warehousereader.line['name'] }}<span class="material-symbols-outlined">open_in_new</span></a></b> in location {{ warehousereader.line['warehouse_location'] }} has quantity <b>{{ warehousereader.line['qty'] }}</b> in Odoo.
+                    <br>The physical count reported that the quantity was <b>{{ warehousereader.line['user_output'] }}</b></h3>
+                    <h2>Do you want to update Odoo with the physical quantity counted as {{ warehousereader.line['user_output'] }}?</h2><br>
+					<a href="https://erp.aimdynamics.com/web#id={{ warehousereader.lines['odoo_id'] }}&model=product.product" target="_blank" id="update_button">Update Odoo</a>
+                {% endif %}
+
+                <button type="submit" name="action" value="skip">Skip</button>
+                <button type="submit" name="action" value="complete">Mark as Complete</button>
+            </form>
+
+            <br><h4>Action Items Remaining: {{ warehousereader.get_filesize() }}</h4>
+
+        </div>
+    </body>
+</html>

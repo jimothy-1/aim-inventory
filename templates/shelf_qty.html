@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="icon" href="data:,">
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/home_style.css') }}">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"/>
+    </head>
+    <body>
+        <div class="area" >
+            <ul class="circles">
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+            </ul>
+          </div >
+
+        <div class='context' style="text-align: center;">
+            <h1>Shelf {{ shelf }} Inventory <a href="/"><span class="material-symbols-outlined">home</span></a></h1><br>
+
+            <form method="post" action="/{{shelf}}/{{shelf_code}}/process-qty/{{times_visited}}">
+                {% if times_visited %}
+                <p>Confirm the following qty(s):</p>
+                {% endif%}
+                
+                {% for product in bin_data.products %}
+
+                <p>Enter the quantity for <b>{{ product.name }}</b>:</p>
+                <h3>Current Location(s): {{ product.warehouse_locations_str() }}</h3>
+                <br>
+                <input type="number" id="textbox" name="textbox-{{ product.name }}">
+                <br><br>
+
+                {% endfor %}
+
+                <!-- Right now, I don't think this is useful
+                {% for i in range(11) %}
+                <a href="/{{ shelf }}/{{ shelf_code }}/{{ counter }}/qty/{{ i }}" id="a_{{ i }}">{{ i }}</a>
+                {% endfor %} -->
+                
+                <br><br><button type="submit">Submit</button>
+            </form>
+        </div>
+    </body>
+</html>

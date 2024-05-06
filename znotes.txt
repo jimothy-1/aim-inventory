@@ -1,0 +1,15 @@
+
+5/6/24
+
+Deleted the Shelf C file, looks like it fixed the issue we were having
+
+
+I made the link more generic so that anyone should be able to access it.
+I shortened the link to:
+- - -
+https://erp.aimdynamics.com/web#id={{ warehousereader.lines['odoo_id'] }}&model=product.product
+
+Just in case, here's the old code (better than nothing)
+- - -
+<a href="https://erp.aimdynamics.com/web#id={{ warehousereader.lines['odoo_id'] }}&action=377&model=product.product&view_type=form&cids=1&menu_id=200" target="_blank" id="update_button">Update Odoo</a>
+

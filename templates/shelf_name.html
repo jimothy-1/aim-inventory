@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="icon" href="data:,">
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/home_style.css') }}">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"/>
+    </head>
+    <body>
+        <div class="area" >
+            <ul class="circles">
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+            </ul>
+          </div >
+
+        <div class='context' style="text-align: center;">
+            <h1>Shelf {{ shelf }} Inventory <a href="/"><span class="material-symbols-outlined">home</span></a></h1><br>
+            <form method="post" action="#">
+                <p>Please enter what is in {{ shelf_code }}</b></p><br>
+                <input type="name" id="textbox" name="textbox"><br><br>
+                <p>Please enter it's quantity:</b></p><br>
+                <input type="number" id="textbox_quantity" name="textbox_quantity">
+                <br><br><button type="name_btn">Submit</button>  
+            </form>
+        </div>
+    </body>
+</html>
