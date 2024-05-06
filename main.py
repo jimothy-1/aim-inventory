@@ -19,8 +19,6 @@ from WarehouseWriter import *
 
 from datetime import datetime, timedelta
 
-#test push
-
 # #list of all products in the shelf, used by the website to display info on the screen
 # shelf_products = []
 # counter = 0
