@@ -45,7 +45,7 @@
                     <h3>Part number <b><a href="https://ship5.shipstation.com/products?quickSearch={{ warehousereader.line['name'] }}" target="_blank" id= "text_link">{{ warehousereader.line['name'] }}<span class="material-symbols-outlined">open_in_new</span></a></b> in location {{ warehousereader.line['warehouse_location'] }} has quantity <b>{{ warehousereader.line['qty'] }}</b> in Odoo.
                     <br>The physical count reported that the quantity was <b>{{ warehousereader.line['user_output'] }}</b></h3>
                     <h2>Do you want to update Odoo with the physical quantity counted as {{ warehousereader.line['user_output'] }}?</h2><br>
-					<a href="https://erp.aimdynamics.com/web#id={{ warehousereader.lines['odoo_id'] }}&model=product.product" target="_blank" id="update_button">Update Odoo</a>
+					<a href="https://erp.aimdynamics.com/web#id={{ warehousereader.line['odoo_id'] }}&model=product.product" target="_blank" id="update_button">Update Odoo</a>
                 {% endif %}
 
                 <button type="submit" name="action" value="skip">Skip</button>

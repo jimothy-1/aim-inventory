@@ -457,6 +457,10 @@ def admin_main(shelf_letter):
         if button_value == 'complete':
             warehousereader.delete_line()
 
+        #make sure reader not empty
+        if warehousereader.is_complete():
+            return redirect(f'/finished-admin/{shelf_letter.upper()}')
+
         #get next line
         return render_template('admin_main.html', warehousereader=warehousereader)
 
@@ -493,7 +497,11 @@ def update_product_locations(line):
     #true if update successful
     return shipstation.update_product(product)
 
-
+@app.route('/finished-admin/<shelf_letter>')
+def finished_admin(shelf_letter):
+    shelf_letter = shelf_letter.upper()
+    warehousereadershell.remove_reader(shelf_letter)
+    return render_template('finished.html', shelf_letter=shelf_letter, link='/admin')
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=80)

@@ -138,6 +138,7 @@ class WarehouseWriter:
     def write_error_lines(self, product_list, error_message, user_output=None):
         for product in product_list:
             product_fields = product.dict_view()
+            print(product_fields)
             product_fields['qty_available'] = product_fields['qty']
             product_fields['date_modified'] = datetime.now().strftime(f'%m-%d-%Y{file_information_seperator}%H-%M-%S')
             product_fields['error_type'] = error_message
@@ -234,6 +235,10 @@ class WarehouseReaderShell:
         print(self.readers_dict)
         return self.readers_dict[shelf_letter.upper()]
 
+    def remove_reader(self, shelf_letter):
+        shelf_letter = shelf_letter.upper()
+        del self.readers_dict[shelf_letter]
+
 
 class WarehouseReader:
     def __init__(self, filename=None, file_extension=None):
@@ -311,6 +316,10 @@ class WarehouseReader:
         self.write_to_file(lines)
         #update line
         self.line = self.get_line()
+
+    def is_complete(self):
+        return not len(self.get_lines())
+
 
 class Line:
     def __init__(self, line_data):
